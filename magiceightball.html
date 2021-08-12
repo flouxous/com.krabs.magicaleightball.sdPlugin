@@ -25,28 +25,32 @@
                 },
                 fKrabs_EightBall: function (context, settings) {
                     var payload = settingsCache[context];
-                    var answers = ["It is certain",
-                                   "It is decidedly so",
-                                   "Without a doubt",
-                                   "Yes - definitely",
-                                   "You may rely on it",
-                                   "As I see it, yes",
-                                   "Most likely",
-                                   "Outlook good",
-                                   "Yes", "Signs point to yes",
-                                   "Don't count on it",
-                                   "My reply is no",
-                                   "My sources say no",
-                                   "Outlook not so good",
-                                   "Very doubtful",
-                                   "Reply hazy, try again",
-                                   "Ask again later",
-                                   "Better not tell you now",
-                                   "Cannot predict now",
-                                   "Concentrate and ask again"];
+                    var answers = ["It is\ncertain",
+                                   "It is\ndecidedly\nso",
+                                   "Without\na\ndoubt",
+                                   "Yes\ndefinitely",
+                                   "You may\nrely\non it",
+                                   "As I\nsee\nit,\nyes",
+                                   "Most\nlikely",
+                                   "Outlook\ngood",
+                                   "Yes",
+                                   "Signs\npoint\nto yes",
+                                   "Don't\ncount\non it",
+                                   "My\nreply\nis no",
+                                   "My\nsources\nsay no",
+                                   "Outlook\nnot so\ngood",
+                                   "Very\ndoubtful",
+                                   "Reply\nhazy,\ntry\nagain",
+                                   "Ask\nagain\nlater",
+                                   "Better\nnot tell\nyou now",
+                                   "Cannot\npredict\nnow",
+                                   "Concentrate\nand\nask again"];
                     var num = Math.floor(Math.random() * Math.floor(answers.length));
                     var vAnswer = answers[num];
+                    //var vWrappedAnswer = vAnswer.replace(/(.{1,8})/g, "$1\n")
+                    KrabsMagicEightBall.SetTitle(context, vAnswer);
                     console.log("Answer: ", vAnswer);
+                    //console.log(vAnswer.replace(/(.{1,8})/g, "$1\n"))
                   }, // End of fKrabs_EightBall function
 
                 onWillAppear: function (context, settings, coordinates) {
@@ -59,8 +63,8 @@
                 onWillDisappear: function (context, settings, coordinates) {
                     console.log("onWillDisappear context: ", context, " settings: ", settings);
                 },
-                SetTitle: function (context, vMemberName) {
-                    let json = { event: "setTitle", context: context, payload: { title: ""+ vMemberName, target: DestinationEnum.HARDWARE_AND_SOFTWARE } };
+                SetTitle: function (context, vAnswer) {
+                    let json = { event: "setTitle", context: context, payload: { title: ""+ vAnswer, target: DestinationEnum.HARDWARE_AND_SOFTWARE } };
                     websocket.send(JSON.stringify(json));
                 },
                 getSettings: function (context, payload) {
@@ -185,13 +189,13 @@
                         let settings = jsonPayload["settings"];
                         let coordinates = jsonPayload["coordinates"];
                         let userDesiredState = jsonPayload["userDesiredState"];
-                        KrabsMagicEightBall.onWillAppear(context, settings, coordinates, userDesiredState);
+                        KrabsMagicEightBall.onKeyDown(context, settings, coordinates, userDesiredState);
                     } else if (event == "keyUp") {
                         let jsonPayload = jsonObj["payload"];
                         let settings = jsonPayload["settings"];
                         let coordinates = jsonPayload["coordinates"];
                         let userDesiredState = jsonPayload["userDesiredState"];
-                        KrabsMagicEightBall.onWillAppear(context, settings, coordinates, userDesiredState);
+                        KrabsMagicEightBall.onKeyUp(context, settings, coordinates, userDesiredState);
                     } else if (event == "willAppear") {
                         //let jsonPayload = jsonObj["payload"];
                         let settings = jsonPayload["settings"];
@@ -206,7 +210,7 @@
                     } else if (event == "didReceiveSettings") {
                         console.log("didReceiveSettings received payload: ", jsonPayload);
                         }
-                    }
+
                   };
                   websocket.onclose = function () {};
               };

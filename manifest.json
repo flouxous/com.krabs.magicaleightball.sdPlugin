@@ -6,7 +6,7 @@
             "States": [
                 {
                   "Image": "resources/images/actionDefaultImage",
-                  "TitleAlignment": "bottom",
+                  "TitleAlignment": "middle",
                   "FontSize": "12"
                 }
               ],
@@ -19,8 +19,8 @@
     "Author": "Krabs",
     "Category": "Krabs - Streamdeck Labs",
     "CategoryIcon": "resources/images/categoryIcon",
-    "CodePath": "krabs.magiceightball.html",
-    "PropertyInspectorPath": "krabs.magiceightball.html",
+    "CodePath": "magiceightball.html",
+    "PropertyInspectorPath": "magiceightball.html",
     "Description": "Magic Eight Ball! Ask your question and press the button.",
     "Name": "Magic Eight Ball",
     "Icon": "resources/images/pluginIcon",
