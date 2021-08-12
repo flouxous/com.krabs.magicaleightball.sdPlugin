@@ -30,32 +30,57 @@
                                    "Without\na\ndoubt",
                                    "Yes\ndefinitely",
                                    "You may\nrely\non it",
-                                   "As I\nsee\nit,\nyes",
+                                   "As I\nsee it,\nYes",
                                    "Most\nlikely",
                                    "Outlook\ngood",
                                    "Yes",
-                                   "Signs\npoint\nto yes",
+                                   "Signs\npoint\nto Yes",
                                    "Don't\ncount\non it",
-                                   "My\nreply\nis no",
-                                   "My\nsources\nsay no",
+                                   "My\nreply\nis No",
+                                   "My\nsources\nsay No",
                                    "Outlook\nnot so\ngood",
                                    "Very\ndoubtful",
                                    "Reply\nhazy,\ntry\nagain",
                                    "Ask\nagain\nlater",
                                    "Better\nnot tell\nyou now",
                                    "Cannot\npredict\nnow",
-                                   "Concentrate\nand\nask again"];
+                                   "Focus and\nask again"];
                     var num = Math.floor(Math.random() * Math.floor(answers.length));
                     var vAnswer = answers[num];
-                    KrabsMagicEightBall.SetTitle(context, vAnswer);
-                    console.log("Answer: ", vAnswer);
-                    var canvas = document.createElement('CANVAS');
-                    canvas.width = 144;
-                    canvas.height = 144;
-                    var ctx = canvas.getContext('2d');
-                    ctx.fillStyle = "#FF0000";
-                    ctx.fillRect(0, 0, 144, 144);
-                    ctx.drawImage(this,0,0);
+
+                    var imageUrl = "resources/images/bg_smoke.png";
+                    convertImgToBase64_2(imageUrl, function(base64Img){
+                    var vAvatarBase64 = base64Img;
+                    setImage(context, vAvatarBase64);
+                  });
+
+                    KrabsMagicEightBall.SetTitle(context, "Let me\nthink...");
+                    var vWaitForAnswer = function(){
+                      KrabsMagicEightBall.SetTitle(context, vAnswer);
+
+                      var vResetToBlank = function() {
+                        var imageUrl = "resources/images/actionDefaultImage.png";
+                        convertImgToBase64_2(imageUrl, function(base64Img){
+                        var vAvatarBase64 = base64Img;
+                        setImage(context, vAvatarBase64);
+                      });
+                        KrabsMagicEightBall.SetTitle(context, "");
+                      };
+                      setTimeout(vResetToBlank, 3000);
+                    };
+                    setTimeout(vWaitForAnswer, 2000);
+                    //console.log("Answer: ", vAnswer);
+                    /*var imageUrl = "resources/images/bg_blank.png";
+                    convertImgToBase64_2(imageUrl, function(base64Img){
+                    var vAvatarBase64 = base64Img;
+                    setImage(context, vAvatarBase64);
+                    });*/
+
+
+                    //var canvas = document.createElement('CANVAS');
+                    //var ctx = canvas.getContext('2d');
+                    //ctx.fillStyle = "#FF0000";
+                    //ctx.fillRect(0, 0, 144, 144);
                   }, // End of fKrabs_EightBall function
 
                 onWillAppear: function (context, settings, coordinates) {
@@ -144,6 +169,25 @@
                     canvas = null;
               };
               img.src = url;
+            };
+            function convertImgToBase64_2(url, callback, outputFormat){
+              var canvas = document.createElement('CANVAS');
+              var ctx = canvas.getContext('2d');
+              var img = new Image;
+              img.crossOrigin = 'Anonymous';
+              img.onload = function(){
+                  canvas.height = img.height;
+                  canvas.width = img.width;
+                  //ctx.fillStyle = "vColor";
+                  //ctx.fillRect(0, 0, 144, 144);
+                  ctx.drawImage(img,0,0);
+                  var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+                  callback.call(this, dataURL);
+                  // Clean up
+                    canvas = null;
+              };
+              img.src = url;
+              //console.log("vColor: ", vColor)
             };
 
             // Set the state of a key
