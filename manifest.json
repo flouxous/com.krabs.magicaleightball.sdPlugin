@@ -1,0 +1,33 @@
+{
+    "Actions": [
+        {
+            "Icon": "resources/images/actionIcon",
+            "Name": "Magic Eight Ball",
+            "States": [
+                {
+                  "Image": "resources/images/actionDefaultImage",
+                  "TitleAlignment": "bottom",
+                  "FontSize": "12"
+                }
+              ],
+            "SupportedInMultiActions": false,
+            "Tooltip": "Magic Eight Ball!",
+            "UUID": "com.krabs.magiceightball.action"
+        }
+    ],
+    "SDKVersion": 2,
+    "Author": "Krabs",
+    "Category": "Krabs - Streamdeck Labs",
+    "CategoryIcon": "resources/images/categoryIcon",
+    "CodePath": "krabs.magiceightball.html",
+    "PropertyInspectorPath": "krabs.magiceightball.html",
+    "Description": "Magic Eight Ball! Ask your question and press the button.",
+    "Name": "Magic Eight Ball",
+    "Icon": "resources/images/pluginIcon",
+    "URL": "https://www.krabs.me/streamdeck-plugins",
+    "Version": "1.0.1",
+    "OS": [
+        { "Platform": "windows", "MinimumVersion": "10" }
+    ],
+    "Software": { "MinimumVersion": "5.0" }
+}
