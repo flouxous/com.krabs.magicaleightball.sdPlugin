@@ -47,10 +47,15 @@
                                    "Concentrate\nand\nask again"];
                     var num = Math.floor(Math.random() * Math.floor(answers.length));
                     var vAnswer = answers[num];
-                    //var vWrappedAnswer = vAnswer.replace(/(.{1,8})/g, "$1\n")
                     KrabsMagicEightBall.SetTitle(context, vAnswer);
                     console.log("Answer: ", vAnswer);
-                    //console.log(vAnswer.replace(/(.{1,8})/g, "$1\n"))
+                    var canvas = document.createElement('CANVAS');
+                    canvas.width = 144;
+                    canvas.height = 144;
+                    var ctx = canvas.getContext('2d');
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(0, 0, 144, 144);
+                    ctx.drawImage(this,0,0);
                   }, // End of fKrabs_EightBall function
 
                 onWillAppear: function (context, settings, coordinates) {
