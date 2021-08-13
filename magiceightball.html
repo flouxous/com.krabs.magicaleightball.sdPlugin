@@ -56,6 +56,8 @@
 
                     KrabsMagicEightBall.SetTitle(context, "Let me\nthink...");
                     var vWaitForAnswer = function(){
+                      var vSoundFX1 = new Audio('resources/sounds/magic_mystery.mp3');
+                      vSoundFX1.play();
                       KrabsMagicEightBall.SetTitle(context, vAnswer);
 
                       var vResetToBlank = function() {
