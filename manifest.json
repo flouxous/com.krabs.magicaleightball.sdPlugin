@@ -2,7 +2,7 @@
     "Actions": [
         {
             "Icon": "resources/images/actionIcon",
-            "Name": "Magic Eight Ball",
+            "Name": "Magical Eight Ball",
             "States": [
                 {
                   "Image": "resources/images/actionDefaultImage",
@@ -11,7 +11,7 @@
                 }
               ],
             "SupportedInMultiActions": false,
-            "Tooltip": "Magic Eight Ball!",
+            "Tooltip": "Magical Eight Ball!",
             "UUID": "com.krabs.magiceightball.action"
         }
     ],
@@ -21,8 +21,8 @@
     "CategoryIcon": "resources/images/categoryIcon",
     "CodePath": "magiceightball.html",
     "PropertyInspectorPath": "magiceightball.html",
-    "Description": "Magic Eight Ball! Ask your question and press the button.",
-    "Name": "Magic Eight Ball",
+    "Description": "Magical Eight Ball! Ask your question and press the button.",
+    "Name": "Magical Eight Ball",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
     "Version": "1.0.3",
