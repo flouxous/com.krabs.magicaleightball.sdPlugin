@@ -1,5 +1,5 @@
 com.krabs.magiceightball.sdPlugin
-# Magic Eight Ball
+# Magical Eight Ball
 
 ![Image](https://i.postimg.cc/prWjjW2k/Magic-Eight-Ball.png)
 
