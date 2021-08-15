@@ -20,7 +20,7 @@
     "Category": "Krabs - Streamdeck Labs",
     "CategoryIcon": "resources/images/categoryIcon",
     "CodePath": "magiceightball.html",
-    "PropertyInspectorPath": "magiceightball.html",
+    "PropertyInspectorPath": "magiceightball_pi.html",
     "Description": "Magical Eight Ball! Ask your question and press the button.",
     "Name": "Magical Eight Ball",
     "Icon": "resources/images/pluginIcon",
