@@ -48,8 +48,8 @@
                     var num = Math.floor(Math.random() * Math.floor(answers.length));
                     var vAnswer = answers[num];
 
-                    var imageUrl = "resources/images/bg_smoke.png";
-                    convertImgToBase64_2(imageUrl, function(base64Img){
+                    var imageUrl = "resources/images/bg_smoke_green.png";
+                    convertImgToBase64(imageUrl, function(base64Img){
                     var vAvatarBase64 = base64Img;
                     setImage(context, vAvatarBase64);
                   });
@@ -62,13 +62,13 @@
 
                       var vResetToBlank = function() {
                         var imageUrl = "resources/images/actionDefaultImage.png";
-                        convertImgToBase64_2(imageUrl, function(base64Img){
+                        convertImgToBase64(imageUrl, function(base64Img){
                         var vAvatarBase64 = base64Img;
                         setImage(context, vAvatarBase64);
                       });
                         KrabsMagicEightBall.SetTitle(context, "");
                       };
-                      setTimeout(vResetToBlank, 3000);
+                      setTimeout(vResetToBlank, 4000);
                     };
                     setTimeout(vWaitForAnswer, 2000);
                     //console.log("Answer: ", vAnswer);
@@ -121,41 +121,6 @@
             };
 // End of let KrabsMagicEightBall definition
 
-            function convertImgToBase64GrayScale(url, vMemberName, callback, outputFormat){
-              var canvas = document.createElement('CANVAS');
-              var ctx = canvas.getContext('2d');
-              var img = new Image;
-              var vText = vMemberName;
-              img.crossOrigin = 'Anonymous';
-              img.onload = function(){
-                  canvas.height = img.height;
-                  canvas.width = img.width;
-                  ctx.filter = 'grayscale(1) brightness(.55)';
-                    ctx.drawImage(img,0,0);
-                    var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-                    callback.call(this, dataURL);
-                  // Clean up
-                    canvas = null;
-              };
-              img.src = url;
-            };
-            function convertImgToBase64Sepia(url, callback, outputFormat){
-              var canvas = document.createElement('CANVAS');
-              var ctx = canvas.getContext('2d');
-              var img = new Image;
-              img.crossOrigin = 'Anonymous';
-              img.onload = function(){
-                  canvas.height = img.height;
-                  canvas.width = img.width;
-                  ctx.filter = 'sepia(.95)';
-                    ctx.drawImage(img,0,0);
-                    var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-                    callback.call(this, dataURL);
-                  // Clean up
-                    canvas = null;
-              };
-              img.src = url;
-            };
             function convertImgToBase64(url, callback, outputFormat){
               var canvas = document.createElement('CANVAS');
               var ctx = canvas.getContext('2d');
@@ -172,26 +137,6 @@
               };
               img.src = url;
             };
-            function convertImgToBase64_2(url, callback, outputFormat){
-              var canvas = document.createElement('CANVAS');
-              var ctx = canvas.getContext('2d');
-              var img = new Image;
-              img.crossOrigin = 'Anonymous';
-              img.onload = function(){
-                  canvas.height = img.height;
-                  canvas.width = img.width;
-                  //ctx.fillStyle = "vColor";
-                  //ctx.fillRect(0, 0, 144, 144);
-                  ctx.drawImage(img,0,0);
-                  var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-                  callback.call(this, dataURL);
-                  // Clean up
-                    canvas = null;
-              };
-              img.src = url;
-              //console.log("vColor: ", vColor)
-            };
-
             // Set the state of a key
             function setState(context, inState) {
                 if (websocket) {
