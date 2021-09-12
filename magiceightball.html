@@ -21,6 +21,7 @@
                 onKeyUp: function (context, settings, coordinates, userDesiredState) {
                     /* Code here will run when the key is released https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#keyup */
                     settingsCache[context] = settings;
+                    //canvasShake(context);
                     this.fKrabs_EightBall(context);
                 },
                 fKrabs_EightBall: function (context, settings) {
@@ -48,16 +49,21 @@
                     var num = Math.floor(Math.random() * Math.floor(answers.length));
                     var vAnswer = answers[num];
 
-                    var imageUrl = "resources/images/bg_smoke_green.png";
+                    /*var imageUrl = "resources/images/bg_smoke_green.png";
                     convertImgToBase64(imageUrl, function(base64Img){
                     var vAvatarBase64 = base64Img;
                     setImage(context, vAvatarBase64);
-                  });
+                  });*/
 
-                    KrabsMagicEightBall.SetTitle(context, "Let me\nthink...");
+                    //KrabsMagicEightBall.SetTitle(context, "Let me\nthink...");
                     var vWaitForAnswer = function(){
-                      var vSoundFX1 = new Audio('resources/sounds/magic_mystery.mp3');
-                      vSoundFX1.play();
+                      var imageUrl = "resources/images/bubbles.png";
+                      convertImgToBase64(imageUrl, function(base64Img){
+                      var vAvatarBase64 = base64Img;
+                      setImage(context, vAvatarBase64);
+                    });
+                      //var vSoundFX1 = new Audio('resources/sounds/magic_mystery.mp3');
+                      //vSoundFX1.play();
                       KrabsMagicEightBall.SetTitle(context, vAnswer);
 
                       var vResetToBlank = function() {
@@ -70,7 +76,10 @@
                       };
                       setTimeout(vResetToBlank, 4000);
                     };
-                    setTimeout(vWaitForAnswer, 2000);
+                    canvasShake(context);
+                    var vSoundFX1 = new Audio('resources/sounds/shake.mp3');
+                    vSoundFX1.play();
+                    setTimeout(vWaitForAnswer, 1100);
                     //console.log("Answer: ", vAnswer);
                     /*var imageUrl = "resources/images/bg_blank.png";
                     convertImgToBase64_2(imageUrl, function(base64Img){
@@ -83,7 +92,8 @@
                     //var ctx = canvas.getContext('2d');
                     //ctx.fillStyle = "#FF0000";
                     //ctx.fillRect(0, 0, 144, 144);
-                  }, // End of fKrabs_EightBall function
+                  },
+                  // End of fKrabs_EightBall function
 
                 onWillAppear: function (context, settings, coordinates) {
                     /* Code here will run when the Stream Deck application is opened, the user switches between profiles or when a user adds the action
@@ -120,6 +130,43 @@
                 }
             };
 // End of let KrabsMagicEightBall definition
+            function canvasShake(context) {
+              function fShake(context, vPosX, vPosY, vRotate) {
+                var imageUrl = "resources/images/actionDefaultImage.png";
+                convertImgToBase64_motion(imageUrl, vPosX, vPosY, vRotate, function(base64Img){
+                var vAvatarBase64 = base64Img;
+                setImage(context, vAvatarBase64);
+                });
+              };
+              setTimeout(function() { fShake(context,3,1,0) }, 100);
+              setTimeout(function() { fShake(context,0,0,0) }, 200);
+              setTimeout(function() { fShake(context,-5,-2,0) }, 300);
+              setTimeout(function() { fShake(context,6,1,0) }, 400);
+              setTimeout(function() { fShake(context,-3,0,0) }, 500);
+              setTimeout(function() { fShake(context,1,2,0) }, 600);
+              setTimeout(function() { fShake(context,0,-1,0) }, 700);
+              setTimeout(function() { fShake(context,-2,0,0) }, 800);
+              setTimeout(function() { fShake(context,4,2,0) }, 900);
+              setTimeout(function() { fShake(context,0,0,0) }, 1000);
+            };
+
+            function convertImgToBase64_motion(url, vPosX, vPosY, vRotate, callback, outputFormat){
+              var canvas = document.createElement('CANVAS');
+              var ctx = canvas.getContext('2d');
+              var img = new Image;
+              img.crossOrigin = 'Anonymous';
+              img.onload = function(){
+                  canvas.height = img.height;
+                  canvas.width = img.width;
+                    //ctx.rotate(vRotate*Math.PI/180);
+                    ctx.drawImage(img,vPosX,vPosY);
+                    var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+                    callback.call(this, dataURL);
+                  // Clean up
+                    canvas = null;
+              };
+              img.src = url;
+            };
 
             function convertImgToBase64(url, callback, outputFormat){
               var canvas = document.createElement('CANVAS');
