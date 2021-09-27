@@ -65,6 +65,8 @@
                       //var vSoundFX1 = new Audio('resources/sounds/magic_mystery.mp3');
                       //vSoundFX1.play();
                       KrabsMagicEightBall.SetTitle(context, vAnswer);
+                      var vLogMessage = vAnswer.replace(/\r?\n|\r/gm, " ");
+                      logMessage(context, vLogMessage);
 
                       var vResetToBlank = function() {
                         var imageUrl = "resources/images/actionDefaultImage.png";
@@ -80,18 +82,7 @@
                     var vSoundFX1 = new Audio('resources/sounds/shake.mp3');
                     vSoundFX1.play();
                     setTimeout(vWaitForAnswer, 1100);
-                    //console.log("Answer: ", vAnswer);
-                    /*var imageUrl = "resources/images/bg_blank.png";
-                    convertImgToBase64_2(imageUrl, function(base64Img){
-                    var vAvatarBase64 = base64Img;
-                    setImage(context, vAvatarBase64);
-                    });*/
 
-
-                    //var canvas = document.createElement('CANVAS');
-                    //var ctx = canvas.getContext('2d');
-                    //ctx.fillStyle = "#FF0000";
-                    //ctx.fillRect(0, 0, 144, 144);
                   },
                   // End of fKrabs_EightBall function
 
@@ -184,6 +175,18 @@
               };
               img.src = url;
             };
+            function logMessage(context, vLogMessage) {
+                if (websocket) {
+                    var json = {
+                        'event': 'logMessage',
+                        'context': context,
+                        'payload': {
+                            'message': vLogMessage
+                        }
+                    };
+                    websocket.send(JSON.stringify(json));
+                }
+            }
             // Set the state of a key
             function setState(context, inState) {
                 if (websocket) {
