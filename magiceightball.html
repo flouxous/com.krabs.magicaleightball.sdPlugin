@@ -26,6 +26,9 @@
                 },
                 fKrabs_EightBall: function (context, settings) {
                     var payload = settingsCache[context];
+                    if (payload != null && payload.hasOwnProperty('vKrabs_SFXOn')) {
+                      var vSFXOn = payload['vKrabs_SFXOn'];
+                    }
                     var answers = ["It is\nCertain",
                                    "It is\nDecidedly\nSo",
                                    "Without\na\nDoubt",
@@ -78,11 +81,17 @@
                       };
                       setTimeout(vResetToBlank, 4000);
                     };
-                    canvasShake(context);
-                    var vSoundFX1 = new Audio('resources/sounds/shake.mp3');
-                    vSoundFX1.play();
-                    setTimeout(vWaitForAnswer, 1100);
 
+                    if (vSFXOn == false) {
+                      var vSoundFX1 = new Audio('resources/sounds/silent.mp3');
+                      vSoundFX1.play();
+                    } else {
+                      var vSoundFX1 = new Audio('resources/sounds/shake.mp3');
+                      vSoundFX1.play();
+                    }
+
+                    canvasShake(context);
+                    setTimeout(vWaitForAnswer, 1100);
                   },
                   // End of fKrabs_EightBall function
 
