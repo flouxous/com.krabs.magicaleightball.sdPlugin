@@ -25,7 +25,7 @@
     "Name": "Magical Eight Ball",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
-    "Version": "2.0.3",
+    "Version": "2.0.4",
     "OS": [
         { "Platform": "windows", "MinimumVersion": "10" },
         { "Platform": "mac", "MinimumVersion": "10.11" }
